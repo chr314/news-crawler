@@ -32,6 +32,22 @@ class Controller
         }
     }
 
+    public function getController($controller, $function, $data = [])
+    {
+        $path = __DIR__ . "/controller/" . $controller . ".php";
+        if (file_exists($path) && is_file($path)) {
+            include $path;
+            $class_name = "Controller_" . $controller;
+            if (class_exists($class_name, false)) {
+                $route_class = new $class_name();
+                if (is_callable(array($route_class, $function))) {
+                    return $route_class->$function($data);
+                }
+            }
+        }
+        return false;
+    }
+
     public function loadModel($model)
     {
         $path = __DIR__ . "/model/" . $model . ".php";
@@ -64,6 +80,12 @@ class Controller
 
     public function responseView($view, $data)
     {
+        echo $this->renderView($view, $data);
+        exit;
+    }
+
+    public function renderView($view, $data)
+    {
         $path = __DIR__ . "/view/" . $view . ".php";
         if (file_exists($path)) {
             if (is_array($data)) {
@@ -73,9 +95,8 @@ class Controller
             require $path;
             $tpl_result = ob_get_contents();
             ob_end_clean();
-            echo $tpl_result;
-            exit;
+            return $tpl_result;
         }
-        exit;
+        return "";
     }
 }
