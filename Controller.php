@@ -7,11 +7,11 @@ class Controller
     protected $user;
     protected $post_data = [];
     protected $get_data = [];
-    protected $request = (object)["post" => [], "get" => []];
+    protected $request;
 
     public function __construct($data = [], $conn = null)
     {
-
+        $this->request = (object)["post" => [], "get" => []];
         $this->data = $data;
         if ($conn) {
             $this->db = $conn;
@@ -22,7 +22,7 @@ class Controller
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $inputJSON = file_get_contents('php://input');
-            $this->request->post= json_decode($inputJSON, true);
+            $this->request->post = json_decode($inputJSON, true);
         }
 
         if (!empty($_GET)) {
@@ -34,12 +34,15 @@ class Controller
 
     public function loadModel($model)
     {
-        $path = __DIR__ . "/models/" . $model;
+        $path = __DIR__ . "/model/" . $model . ".php";
         if (file_exists($path) && is_file($path)) {
             require_once $path;
-            $class_name = "model_" . $model;
+            $class_name = "Model_" . $model;
             if (class_exists($class_name, false)) {
-                $this->{$class_name} = new $class_name($this->db);
+                if (!isset($this->model)) {
+                    $this->model = new stdClass();
+                }
+                $this->model->{$model} = new $class_name($this->db);
                 return true;
             }
         }
@@ -56,6 +59,23 @@ class Controller
         }
 
         echo json_encode($resp);
+        exit;
+    }
+
+    public function responseView($view, $data)
+    {
+        $path = __DIR__ . "/view/" . $view . ".php";
+        if (file_exists($path)) {
+            if (is_array($data)) {
+                extract($data, EXTR_PREFIX_SAME, "tpl_var");
+            }
+            ob_start();
+            require $path;
+            $tpl_result = ob_get_contents();
+            ob_end_clean();
+            echo $tpl_result;
+            exit;
+        }
         exit;
     }
 }
