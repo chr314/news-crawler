@@ -2,24 +2,40 @@
 
 class Model_Posts extends Model
 {
-    function getPosts($search)
+    function getPosts($data = [])
     {
         $sql = "";
 
-        if (!empty($search["search"])) {
-            $sql .= " AND p.title LIKE '%{$this->db->escape($search["search"])}%'";
+        if (!empty($data["search"])) {
+            $sql .= " AND p.title LIKE '%{$this->db->escape($data["search"])}%'";
         }
 
-        if (!empty($search["slogan"])) {
-            $sql .= " AND p.slogan='{$this->db->escape($search["slogan"])}'";
+        if (!empty($data["slogan"])) {
+            $sql .= " AND p.slogan='{$this->db->escape($data["slogan"])}'";
         }
 
-        if (!empty($search["source_id"])) {
-            $sql .= " AND p.source_id='" . (int)$search["source_id"] . "'";
+        if (!empty($data["source_id"]) && $data["source_id"] > 0) {
+            $sql .= " AND p.source_id='" . (int)$data["source_id"] . "'";
         }
 
-        if (!empty($search["order"])) {
-            $sql .= " AND p.source_id='" . (int)$search["source_id"] . "'";
+        if (!empty($data["sort"])) {
+            $sql .= " ORDER BY " . $data["sort"] . "";
+        }
+
+        if (!empty($data["order"])) {
+            $sql .= strtolower($data["order"]) == "desc" ? " DESC " : " ASC ";
+        }
+
+        if (isset($data['start']) || isset($data['limit'])) {
+            if ($data['start'] < 0) {
+                $data['start'] = 0;
+            }
+
+            if ($data['limit'] < 1) {
+                $data['limit'] = 20;
+            }
+
+            $sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
         }
 
         return $this->db->query("SELECT * FROM posts p LEFT JOIN sources s ON s.source_id=p.source_id WHERE 1=1 " . $sql)->rows;

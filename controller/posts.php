@@ -13,10 +13,29 @@ class Controller_Posts extends Controller
                 "canonical" => "/index.php?route=posts/post&post_id=" . $data["post_data"]["post_id"]];
 
             $data["header"] = $this->renderView("header", $header_data);
-            $data["footer"] = $this->renderView("header", []);
+
+            $data["footer"] = $this->renderView("footer", []);
 
 
             $this->responseView("post", $data);
         }
+    }
+
+    public function posts()
+    {
+        $this->loadModel("posts");
+        $data["posts"] = $this->model->posts->getPosts($this->request->get);
+
+        $header_data = [
+            "title" => "News Crawler",
+            "canonical" => "/"
+        ];
+
+        $data["header"] = $this->renderView("header", $header_data);
+
+        $data["footer"] = $this->renderView("footer", []);
+
+
+        $this->responseView("posts", $data);
     }
 }
