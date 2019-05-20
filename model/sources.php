@@ -2,16 +2,15 @@
 
 class Model_Sources extends Model
 {
-    function getSources($search = [])
+    function getSources($data = [])
     {
-
         $sql = "";
 
-        if (!empty($search["search"])) {
-            $sql .= " AND s.name LIKE '%{$this->db->escape($search["search"])}%'";
+        if (!empty($data["search"])) {
+            $sql .= " AND s.name LIKE '%{$this->db->escape($data["search"])}%'";
         }
 
-        return $this->db->query("SELECT s.* FROM sources s WHERE 1=1 " . $sql)->rows;
+        return $this->db->query("SELECT * FROM sources s WHERE 1=1 " . $sql)->rows;
     }
 
     function getSource($id)

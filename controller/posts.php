@@ -10,11 +10,12 @@ class Controller_Posts extends Controller
 
             $header_data = [
                 "title" => $data["post_data"]["title"] . " - News Crawler",
-                "canonical" => "/index.php?route=posts/post&post_id=" . $data["post_data"]["post_id"]];
+                "canonical" => "/index.php?route=posts/post&post_id=" . $data["post_data"]["post_id"]
+            ];
 
-            $data["header"] = $this->renderView("header", $header_data);
+            $data["header"] = $this->getController("common", "header", $header_data);
 
-            $data["footer"] = $this->renderView("footer", []);
+            $data["footer"] = $this->getController("common", "footer");
 
 
             $this->responseView("post", $data);
@@ -25,6 +26,9 @@ class Controller_Posts extends Controller
     {
         $this->loadModel("posts");
         $data["posts"] = $this->model->posts->getPosts($this->request->get);
+
+        $this->loadModel("sources");
+        $data["sources"] = $this->model->sources->getSources();
 
         $header_data = [
             "title" => "News Crawler",

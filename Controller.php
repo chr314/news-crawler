@@ -14,7 +14,7 @@ class Controller
         if ($conn) {
             $this->db = $conn;
         } else {
-            require __DIR__ . "/db.php";
+            require_once __DIR__ . "/db.php";
             $this->db = new DB();
         }
 
@@ -41,7 +41,7 @@ class Controller
     {
         $path = __DIR__ . "/controller/" . $controller . ".php";
         if (file_exists($path) && is_file($path)) {
-            include $path;
+            require_once $path;
             $class_name = "Controller_" . $controller;
             if (class_exists($class_name, false)) {
                 $route_class = new $class_name();
