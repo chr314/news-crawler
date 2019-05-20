@@ -19,7 +19,7 @@ class Model_Posts extends Model
         }
 
         if (!empty($data["sort"])) {
-            $sql .= " ORDER BY " . $data["sort"] . "";
+            $sql .= " ORDER BY {$this->db->escape($data["sort"])}";
         }
 
         if (!empty($data["order"])) {
