@@ -19,7 +19,9 @@ $sources_rows = $sources->getSources();
 
 foreach ($sources_rows as $row) {
     if ($row["crawler_method"] == "wordpress") {
-        download_wp_posts($row["url"], $row["source_id"]);
+        for ($x = 1; $x < 11; $x++) {
+            download_wp_posts($row["url"], $row["source_id"], $x);
+        }
     }
 }
 
@@ -29,7 +31,7 @@ function download_wp_posts($url, $source_id, $page = 1)
     $log = new Model_Crawler_Log();
 
 
-    $resp = Curl::get($url . "wp-json/wp/v2/posts?per_page=100&page=" . $page);
+    $resp = Curl::get($url . "wp-json/wp/v2/posts?search=musk&per_page=100&page=" . $page);
     $json = json_decode($resp, true);
 
     $data = [];
