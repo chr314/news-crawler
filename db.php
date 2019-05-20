@@ -26,11 +26,8 @@ class DB
         if ($first_word == "select" || $first_word == "show") {
             $rows = [];
             if ($q_data && $q_data->num_rows) {
-
-                if ($q_data->num_rows) {
-                    while ($result_row = $q_data->fetch_assoc()) {
-                        $rows[] = $result_row;
-                    }
+                while ($result_row = $q_data->fetch_assoc()) {
+                    $rows[] = $result_row;
                 }
             }
             $q_data->row = current($rows);
