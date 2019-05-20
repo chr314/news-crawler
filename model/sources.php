@@ -2,7 +2,7 @@
 
 class Model_Sources extends Model
 {
-    function getSources($search)
+    function getSources($search = [])
     {
 
         $sql = "";
@@ -11,7 +11,7 @@ class Model_Sources extends Model
             $sql .= " AND s.name LIKE '%{$this->db->escape($search["search"])}%'";
         }
 
-        return $this->db->query("SELECT * FROM sources s WHERE 1=1 " . $sql)->rows;
+        return $this->db->query("SELECT s.* FROM sources s WHERE 1=1 " . $sql)->rows;
     }
 
     function getSource($id)

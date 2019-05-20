@@ -23,4 +23,4 @@ if (!empty($_GET["route"]) && preg_match("/(([a-zA-Z0-9_]*)\/([a-zA-Z0-9_]*))/",
 
 }
 
-header("HTTP/1.0 404 Not Found");
+header("Location: /index.php?route=posts/posts");
