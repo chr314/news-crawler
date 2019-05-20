@@ -5,13 +5,11 @@ class Controller
     protected $db;
     protected $data;
     protected $user;
-    protected $post_data = [];
-    protected $get_data = [];
     protected $request;
 
     public function __construct($data = [], $conn = null)
     {
-        $this->request = (object)["post" => [], "get" => []];
+        $this->request = (object)["post" => [], "get" => [], "post_body" => []];
         $this->data = $data;
         if ($conn) {
             $this->db = $conn;
@@ -21,8 +19,15 @@ class Controller
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $inputJSON = file_get_contents('php://input');
-            $this->request->post = json_decode($inputJSON, true);
+            $input = file_get_contents('php://input');
+            $this->request->post_body = json_decode($input, true);
+            if (json_last_error() != JSON_ERROR_NONE) {
+                $this->request->post_body = $input;
+            }
+
+            if (!empty($_POST)) {
+                $this->request->post = $_POST;
+            }
         }
 
         if (!empty($_GET)) {
