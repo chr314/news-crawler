@@ -5,7 +5,11 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-140693089-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
         gtag('js', new Date());
 
         gtag('config', 'UA-140693089-1');
@@ -55,5 +59,43 @@
                 echo '<a class="p-2 text-muted" href="/index.php?route=posts/posts&source_id=' . $source["source_id"] . '">' . $source["name"] . '</a>';
             } ?>
         </nav>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <form action="/index.php" method="get">
+                <input type="hidden" name="route" value="posts/posts"/>
+                <div class="form-group">
+                    <label for="formGroupExampleInput">Search</label>
+                    <input type="text" class="form-control" name="search" id="search" placeholder="Search...">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Source</label>
+                    <select class="form-control" name="source_id" id="source_id">
+                        <option value="0">All</option>
+                        <?php
+                        foreach ($sources as $source) {
+                            echo "<option value='" . $source["source_id"] . "'>" . $source["name"] . "</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Sort By</label>
+                    <select class="form-control" name="sort" id="sort">
+                        <option value="p.publish_time">Publish Time</option>
+                        <option value="p.inserted_time">Crawler Time</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Order</label>
+                    <select class="form-control" name="order" id="order">
+                        <option value="ASC">ASC</option>
+                        <option value="DESC">DESC</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary mb-2">Search</button>
+            </form>
+        </div>
     </div>
 </div>

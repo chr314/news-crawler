@@ -3,6 +3,7 @@
 
 <main role="main" class="container">
     <div class="row">
+
         <div class="col-md-8 blog-main">
             <h3 class="pb-4 mb-4 font-italic border-bottom">
                 News Crawler
@@ -12,14 +13,9 @@
                 <h2 class="blog-post-title"><?php echo $post_data["title"] ?></h2>
                 <p class="blog-post-meta"><?php echo $post_data["publish_time"] ?></p>
 
-                <p></p>
                 <hr>
-
                 <?php echo $post_data["content"] ?>
-
             </div>
-
-
         </div>
 
         <aside class="col-md-4 blog-sidebar">

@@ -3,41 +3,6 @@
 
 <main role="main" class="container">
     <div class="row">
-        <div class="col-md-12">
-            <form action="/index.php" method="get">
-                <input type="hidden" name="route" value="posts/posts"/>
-                <div class="form-group">
-                    <label for="formGroupExampleInput">Search</label>
-                    <input type="text" class="form-control" name="search" id="search" placeholder="Search...">
-                </div>
-                <div class="form-group">
-                    <label for="exampleFormControlSelect1">Source</label>
-                    <select class="form-control" name="source_id" id="source_id">
-                        <option value="0">All</option>
-                        <?php
-                        foreach ($sources as $source) {
-                            echo "<option value='" . $source["source_id"] . "'>" . $source["name"] . "</option>";
-                        }
-                        ?>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="exampleFormControlSelect1">Sort By</label>
-                    <select class="form-control" name="sort" id="sort">
-                        <option value="p.publish_time">Publish Time</option>
-                        <option value="p.inserted_time">Crawler Time</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="exampleFormControlSelect1">Order</label>
-                    <select class="form-control" name="order" id="order">
-                        <option value="ASC">ASC</option>
-                        <option value="DESC">DESC</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary mb-2">Search</button>
-            </form>
-        </div>
         <div class="col-md-12 blog-main">
             <h3 class="pb-4 mb-4 font-italic border-bottom">
                 News Crawler
