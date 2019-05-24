@@ -20,22 +20,19 @@
             </div>
 
 
-        </div><!-- /.blog-main -->
+        </div>
 
         <aside class="col-md-4 blog-sidebar">
             <div class="p-4 mb-3 bg-light rounded">
-                <h4 class="font-italic">About Source</h4>
+                <h4 class="font-italic">About the Source</h4>
                 <p class="mb-0"><?php echo $post_data["name"] ?></p>
-                <a href="<?php echo $post_data["source_url"] ?>"><p class="mb-0">Original Post</p></a>
+                <a href="<?php echo $post_data["source_url"] ?>" target="_blank"><p class="mb-0">Original Post</p></a>
             </div>
 
-            <div class="p-4">
-                <h4 class="font-italic">Elsewhere</h4>
-                <ol class="list-unstyled">
-                    <li><a href="#">GitHub</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">Facebook</a></li>
-                </ol>
+            <div class="p-4 mb-3 bg-light rounded">
+                <h4 class="font-italic">About the Author</h4>
+                <p class="mb-0"></p>
+                <a href=""><p class="mb-0"></p></a>
             </div>
         </aside>
 
