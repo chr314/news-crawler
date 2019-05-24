@@ -38,7 +38,7 @@ class Model_Posts extends Model
                 $data['per_page'] = 20;
             }
 
-            $sql .= " LIMIT " . ((int)$data['page'] - 1) . "," . (int)($data['per_page'] * $data['page']);
+            $sql .= " LIMIT " . (int)(($data['page'] - 1) * $data['per_page']) . "," . (int)$data['per_page'];
         }
 
         return $this->db->query("SELECT * FROM posts p LEFT JOIN sources s ON s.source_id=p.source_id WHERE 1=1 " . $sql)->rows;
