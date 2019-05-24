@@ -42,4 +42,12 @@ class Controller_Posts extends Controller
 
         $this->responseView("posts", $data);
     }
+
+    public function posts_json()
+    {
+        $this->loadModel("posts");
+        $data = $this->model->posts->getPosts($this->request->get);
+
+        $this->responseJSON(true, $data);
+    }
 }
