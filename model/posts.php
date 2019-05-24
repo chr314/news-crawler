@@ -26,16 +26,19 @@ class Model_Posts extends Model
             $sql .= strtolower($data["order"]) == "desc" ? " DESC " : " ASC ";
         }
 
-        if (isset($data['start']) || isset($data['limit'])) {
-            if ($data['start'] < 0) {
-                $data['start'] = 0;
+        if (isset($data['page']) || isset($data['per_page'])) {
+            $data['page'] = (int)$data['page'];
+            $data['per_page'] = (int)$data['per_page'];
+
+            if ($data['page'] < 1) {
+                $data['page'] = 1;
             }
 
-            if ($data['limit'] < 1) {
-                $data['limit'] = 20;
+            if ($data['per_page'] < 1) {
+                $data['per_page'] = 20;
             }
 
-            $sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
+            $sql .= " LIMIT " . ((int)$data['page'] - 1) . "," . (int)($data['per_page'] * $data['page']);
         }
 
         return $this->db->query("SELECT * FROM posts p LEFT JOIN sources s ON s.source_id=p.source_id WHERE 1=1 " . $sql)->rows;
