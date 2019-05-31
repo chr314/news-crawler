@@ -89,18 +89,18 @@ class Controller
         exit;
     }
 
-    public function renderView($view, $data)
+    public function renderView($__view, $__data)
     {
-        $path = __DIR__ . "/view/" . $view . ".php";
-        if (file_exists($path)) {
-            if (is_array($data)) {
-                extract($data, EXTR_PREFIX_SAME, "tpl_var");
+        $__path = __DIR__ . "/view/" . $__view . ".php";
+        if (is_file($__path)) {
+            if ($__data && is_array($__data)) {
+                extract($__data, EXTR_PREFIX_SAME, "tpl_var");
             }
             ob_start();
-            require $path;
-            $tpl_result = ob_get_contents();
+            require $__path;
+            $__tpl_result = ob_get_contents();
             ob_end_clean();
-            return $tpl_result;
+            return $__tpl_result;
         }
         return "";
     }
