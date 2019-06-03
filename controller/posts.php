@@ -26,18 +26,13 @@ class Controller_Posts extends Controller
         $this->loadModel("posts");
         $data["posts"] = $this->model->posts->getPosts($this->request->get);
 
-        $this->loadModel("sources");
-        $data["sources"] = $this->model->sources->getSources();
-
         $header_data = [
             "title" => "News Crawler",
             "canonical" => "/"
         ];
 
-        $data["header"] = $this->renderView("header", $header_data);
-
-        $data["footer"] = $this->renderView("footer", []);
-
+        $data["header"] = $this->getController("common", "header", $header_data);
+        $data["footer"] = $this->getController("common", "footer");
 
         $this->responseView("posts", $data);
     }
