@@ -27,6 +27,20 @@
     <link rel="canonical" href="<?php echo $canonical ?>">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <?php
+    if (!empty($scripts) && is_array($scripts)) {
+        foreach ($scripts as $script) {
+            echo '<script src="' . $script . '"></script>';
+        }
+    }
+
+    if (!empty($styles) && is_array($styles)) {
+        foreach ($styles as $style) {
+            echo '<link href="' . $style . '" rel="stylesheet" type="text/css">';
+        }
+    }
+    ?>
 </head>
 <body>
 
