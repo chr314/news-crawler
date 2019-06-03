@@ -22,7 +22,7 @@ class Model
         if (file_exists($path) && is_file($path)) {
             require_once $path;
             $class_name = "Model_" . $model;
-            if (class_exists($class_name, false)) {
+            if (class_exists($class_name)) {
                 if (!isset($this->model)) {
                     $this->model = new stdClass();
                 }

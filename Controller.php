@@ -43,7 +43,7 @@ class Controller
         if (file_exists($path) && is_file($path)) {
             require_once $path;
             $class_name = "Controller_" . $controller;
-            if (class_exists($class_name, false)) {
+            if (class_exists($class_name)) {
                 $route_class = new $class_name();
                 if (is_callable(array($route_class, $function))) {
                     return $route_class->$function($data);
@@ -59,7 +59,7 @@ class Controller
         if (file_exists($path) && is_file($path)) {
             require_once $path;
             $class_name = "Model_" . $model;
-            if (class_exists($class_name, false)) {
+            if (class_exists($class_name)) {
                 if (!isset($this->model)) {
                     $this->model = new stdClass();
                 }
