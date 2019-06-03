@@ -39,15 +39,11 @@ class Controller
 
     public function getController($controller, $function, $data = [])
     {
-        $path = __DIR__ . "/controller/" . $controller . ".php";
-        if (file_exists($path) && is_file($path)) {
-            require_once $path;
-            $class_name = "Controller_" . $controller;
-            if (class_exists($class_name)) {
-                $route_class = new $class_name();
-                if (is_callable(array($route_class, $function))) {
-                    return $route_class->$function($data);
-                }
+        $class_name = "Controller_" . $controller;
+        if (class_exists($class_name)) {
+            $route_class = new $class_name();
+            if (is_callable(array($route_class, $function))) {
+                return $route_class->$function($data);
             }
         }
         return false;
@@ -55,17 +51,13 @@ class Controller
 
     public function loadModel($model)
     {
-        $path = __DIR__ . "/model/" . $model . ".php";
-        if (file_exists($path) && is_file($path)) {
-            require_once $path;
-            $class_name = "Model_" . $model;
-            if (class_exists($class_name)) {
-                if (!isset($this->model)) {
-                    $this->model = new stdClass();
-                }
-                $this->model->{$model} = new $class_name($this->db);
-                return true;
+        $class_name = "Model_" . $model;
+        if (class_exists($class_name)) {
+            if (!isset($this->model)) {
+                $this->model = new stdClass();
             }
+            $this->model->{$model} = new $class_name($this->db);
+            return true;
         }
         return false;
     }
