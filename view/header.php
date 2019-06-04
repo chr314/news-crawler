@@ -56,7 +56,7 @@
                 <a class="blog-header-logo text-dark" href="/">News Crawler</a>
             </div>
             <div class="col-4 d-flex justify-content-end align-items-center">
-                <a class="text-muted" href="#">
+                <a class="text-muted" href="#searchCollapse" data-toggle="collapse">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
                          stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img"
                          viewBox="0 0 24 24" focusable="false"><title>Search</title>
@@ -77,7 +77,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 collapse" id="searchCollapse">
             <form action="/index.php" method="get">
                 <input type="hidden" name="route" value="posts/posts"/>
                 <div class="form-group">
