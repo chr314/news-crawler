@@ -8,11 +8,11 @@ class Controller_Common extends Controller
         $this->loadModel("sources");
         $data["sources"] = $this->model->sources->getSources();
 
-        return $this->renderView("header", $data);
+        return $this->renderView("common/header", $data);
     }
 
     public function footer($data)
     {
-        return $this->renderView("footer", $data);
+        return $this->renderView("common/footer", $data);
     }
 }
