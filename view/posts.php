@@ -4,10 +4,6 @@
 <main role="main" class="container">
     <div class="row">
         <div class="col-md-12 blog-main">
-            <h3 class="pb-4 mb-4 font-italic border-bottom">
-                News Crawler
-            </h3>
-
             <?php
             foreach ($posts as $post) {
                 ?>

@@ -14,7 +14,11 @@ class Model_Settings extends Model
 
     function getSettingByName($name)
     {
-        return $this->db->query("SELECT * FROM settings WHERE name='{$this->db->escape($name)}'")->row;
+        $setting = $this->db->query("SELECT * FROM settings WHERE name='{$this->db->escape($name)}'")->row;
+        if (!empty($setting)) {
+            return $setting["is_json"] == "1" ? json_decode($setting["value"], true) : $setting["value"];
+        }
+        return null;
     }
 
     function deleteSetting($name)

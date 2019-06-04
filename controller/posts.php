@@ -6,10 +6,11 @@ class Controller_Posts extends Controller
     {
         if ((int)$this->request->get["post_id"] > 0) {
             $this->loadModel("posts");
+            $this->loadModel("settings");
             $data["post_data"] = $this->model->posts->getPost($this->request->get["post_id"]);
 
             $header_data = [
-                "title" => $data["post_data"]["title"] . " - News Crawler",
+                "title" => $data["post_data"]["title"] . " - " . $this->model->settings->getSettingByName("site_name"),
                 "canonical" => "/index.php?route=posts/post&post_id=" . $data["post_data"]["post_id"],
                 "styles" => ["/assets/css/post.css"]
             ];
@@ -24,10 +25,11 @@ class Controller_Posts extends Controller
     public function posts()
     {
         $this->loadModel("posts");
+        $this->loadModel("settings");
         $data["posts"] = $this->model->posts->getPosts($this->request->get);
 
         $header_data = [
-            "title" => "News Crawler",
+            "title" => $this->model->settings->getSettingByName("site_name"),
             "canonical" => "/"
         ];
 

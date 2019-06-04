@@ -53,7 +53,7 @@
                 <a class="text-muted" target="_blank" href="https://github.com/chr314/news-crawler">Github</a>
             </div>
             <div class="col-4 text-center">
-                <a class="blog-header-logo text-dark" href="/">News Crawler</a>
+                <a class="blog-header-logo text-dark" href="/"><?php echo $site_name ?></a>
             </div>
             <div class="col-4 d-flex justify-content-end align-items-center">
                 <a class="text-muted" href="#searchCollapse" data-toggle="collapse">
