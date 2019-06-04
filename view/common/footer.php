@@ -1,10 +1,7 @@
 <footer class="blog-footer">
-    <p>Developed <a href="https://twitter.com/christoforos_io">@christoforos_io</a></p>
-    <p>
-        <a href="#">Back to top</a>
-    </p>
+    <p><a target="_blank" href="https://github.com/chr314/news-crawler">Github</a></p>
+    <p><a href="#">Back to top</a></p>
 </footer>
-
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
