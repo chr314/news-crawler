@@ -50,7 +50,7 @@
     <header class="blog-header py-3">
         <div class="row flex-nowrap justify-content-between align-items-center">
             <div class="col-4 pt-1">
-                <a class="text-muted" target="_blank" href="https://github.com/chr314/news-crawler">Github</a>
+                <!--<a class="text-muted" target="_blank" href="https://github.com/chr314/news-crawler">Github</a>-->
             </div>
             <div class="col-4 text-center">
                 <a class="blog-header-logo text-dark" href="/"><?php echo $site_name ?></a>
@@ -78,8 +78,7 @@
 
     <div class="row">
         <div class="col-md-12 collapse" id="searchCollapse">
-            <form action="/index.php" method="get">
-                <input type="hidden" name="route" value="posts/posts"/>
+            <form action="" method="get">
                 <div class="form-group">
                     <label for="formGroupExampleInput">Search</label>
                     <input type="text" class="form-control" name="search" id="search" placeholder="Search...">

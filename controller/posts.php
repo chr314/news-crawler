@@ -24,17 +24,19 @@ class Controller_Posts extends Controller
 
     public function posts()
     {
-        $this->loadModel("posts");
         $this->loadModel("settings");
-        $data["posts"] = $this->model->posts->getPosts($this->request->get);
 
         $header_data = [
             "title" => $this->model->settings->getSettingByName("site_name"),
             "canonical" => "/"
         ];
 
+        $footer_data = [
+            "scripts" => ["https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js", "/assets/js/posts.js?v=1.0.4"]
+        ];
+
         $data["header"] = $this->getController("common", "header", $header_data);
-        $data["footer"] = $this->getController("common", "footer");
+        $data["footer"] = $this->getController("common", "footer", $footer_data);
 
         $this->responseView("posts", $data);
     }
@@ -42,7 +44,40 @@ class Controller_Posts extends Controller
     public function posts_json()
     {
         $this->loadModel("posts");
-        $data = $this->model->posts->getPosts($this->request->get);
+        $get = $this->request->get;
+        $filters = [
+            "page" => $get["page"] ?? 1,
+            "per_page" => $get["per_page"] ?? 20
+        ];
+
+        if (!empty($get["search"])) {
+            $filters["search"] = $get["search"];
+        }
+
+        if (!empty($get["source_id"]) && $get["source_id"] > 0) {
+            $filters["source_id"] = $get["source_id"];
+        }
+
+        if (!empty($get["sort"])) {
+            $filters["sort"] = $get["sort"];
+        }
+
+        if (!empty($get["order"])) {
+            $filters["order"] = $get["order"];
+        }
+
+        $posts = $this->model->posts->getPosts($filters);
+
+        $data = [];
+
+        foreach ($posts as $post) {
+            $data[] = [
+                "post_id" => (int)$post["post_id"],
+                "title" => $post["title"],
+                "content" => mb_substr(strip_tags($post["content"]), 0, 500) . "...",
+                "datetime" => date("d/m/Y", strtotime($post["publish_time"])),
+            ];
+        }
 
         $this->responseJSON(true, $data);
     }
