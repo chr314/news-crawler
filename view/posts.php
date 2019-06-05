@@ -15,7 +15,7 @@
         <h2 class="blog-post-title">
             <a href="/index.php?route=posts/post&post_id={{post_id}}">{{title}}</a>
         </h2>
-        <p class="blog-post-meta">{{publish_time}}</p>
+        <p class="blog-post-meta">{{datetime}}</p>
         <p>{{content}}</p>
         <hr>
     </div>

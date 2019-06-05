@@ -71,7 +71,7 @@ class Controller
             $resp[!!$success ? "data" : "errors"] = $arr;
         }
 
-        echo json_encode($resp);
+        echo html_entity_decode(json_encode($resp,JSON_UNESCAPED_UNICODE));
         exit;
     }
 
