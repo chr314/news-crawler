@@ -97,8 +97,10 @@
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Sort By</label>
                     <select class="form-control" name="sort" id="sort">
-                        <option value="p.publish_time">Publish Time</option>
-                        <option value="p.inserted_time">Crawler Time</option>
+                        <option value="title">Title</option>
+                        <option value="publish_time">Publish Time</option>
+                        <option value="inserted_time">Crawler Time</option>
+                        <option value="source">Source</option>
                     </select>
                 </div>
                 <div class="form-group">

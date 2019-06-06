@@ -19,7 +19,24 @@ class Model_Posts extends Model
         }
 
         if (!empty($data["sort"])) {
-            $sql .= " ORDER BY {$this->db->escape($data["sort"])}";
+            switch ($data["sort"]) {
+                case "title":
+                    $sort = "p.title";
+                    break;
+                case "publish_time":
+                    $sort = "p.publish_time";
+                    break;
+                case "inserted_time":
+                    $sort = "p.inserted_time";
+                    break;
+                case "source":
+                    $sort = "p.source_id";
+                    break;
+                default:
+                    $sort = "p.post_id";
+            }
+
+            $sql .= " ORDER BY {$sort}";
         }
 
         if (!empty($data["order"])) {
