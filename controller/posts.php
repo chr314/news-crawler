@@ -32,7 +32,7 @@ class Controller_Posts extends Controller
         ];
 
         $footer_data = [
-            "scripts" => ["https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js", "/assets/js/posts.js?v=1.0.4"]
+            "scripts" => ["https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js", "/assets/js/posts.js?v=1.0.5"]
         ];
 
         $data["header"] = $this->getController("common", "header", $header_data);
