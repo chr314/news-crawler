@@ -60,10 +60,14 @@ class Controller_Posts extends Controller
 
         if (!empty($get["sort"])) {
             $filters["sort"] = $get["sort"];
+        } else {
+            $filters["sort"] = "publish_time";
         }
 
         if (!empty($get["order"])) {
             $filters["order"] = $get["order"];
+        } else {
+            $filters["order"] = "desc";
         }
 
         $posts = $this->model->posts->getPosts($filters);
