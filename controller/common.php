@@ -10,6 +10,7 @@ class Controller_Common extends Controller
         $data["sources"] = $this->model->sources->getSources();
 
         $data["site_name"] = $this->model->settings->getSettingByName("site_name");
+        $data["site_description"] = $this->model->settings->getSettingByName("site_description");
 
         if (empty($data["title"])) {
             $data["title"] = $data["site_name"];
