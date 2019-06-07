@@ -21,6 +21,10 @@ class Autoloader
                 foreach ($file_arr as $file) {
                     if (strtolower(basename($file)) == $file_lcase) {
                         include_once $file;
+
+                        if (class_exists($className)) {
+                            break 2;
+                        }
                     }
                 }
             }
