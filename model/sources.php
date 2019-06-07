@@ -15,6 +15,6 @@ class Model_Sources extends Model
 
     function getSource($id)
     {
-        return $this->db->query("SELECT * FROM sources WHERE source_id" . (int)$id)->row;
+        return $this->db->query("SELECT * FROM sources WHERE source_id=" . (int)$id)->row;
     }
 }
