@@ -29,7 +29,7 @@ class Wordpress implements CrawlerInterface
         $source_data = $model_sources->getSource($this->source_id);
         $search_term = $model_settings->getSettingByName("crawler_search_term");
         $last_post = $model_posts->getPosts(["sort" => "publish_time", "order" => "desc", "per_page" => 1, "page" => 1, "source_id" => $this->source_id]);
-        $last_post_time = count($last_post) > 0 ? date("Y-m-d\TH:i:s",strtotime($last_post[0]["publish_time"]))   : "";
+        $last_post_time = count($last_post) > 0 ? date("Y-m-d\TH:i:s", strtotime($last_post[0]["publish_time"])) : "";
 
 
         $log = new Model_Crawler_Log();
@@ -38,7 +38,7 @@ class Wordpress implements CrawlerInterface
         while (true) {
             $request_url = $source_data["url"] . "wp-json/wp/v2/posts?search=" . $search_term . "&per_page=100&page=" . $page
                 . (!empty($last_post) ? "&after=" . $last_post_time : "");
-            echo $request_url;
+
             $resp = Curl::get($request_url);
             $json = json_decode($resp, true);
 
