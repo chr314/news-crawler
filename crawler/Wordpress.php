@@ -28,6 +28,7 @@ class Wordpress implements CrawlerInterface
 
         $source_data = $model_sources->getSource($this->source_id);
         $search_term = $model_settings->getSettingByName("crawler_search_term");
+        $requests_delay = (int)$model_settings->getSettingByName("crawler_requests_delay");
         $last_post = $model_posts->getPosts(["sort" => "publish_time", "order" => "desc", "per_page" => 1, "page" => 1, "source_id" => $this->source_id]);
         $last_post_time = count($last_post) > 0 ? date("Y-m-d\TH:i:s", strtotime($last_post[0]["publish_time"])) : "";
 
@@ -61,6 +62,7 @@ class Wordpress implements CrawlerInterface
                 $model_posts->addPosts($data);
                 $page++;
 
+                sleep($requests_delay);
             } else {
                 break;
             }
