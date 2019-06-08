@@ -14,7 +14,7 @@ class Model_Posts extends Model
             $sql .= " AND p.slogan='{$this->db->escape($data["slogan"])}'";
         }
 
-        if (!empty($data["source_id"]) && $data["source_id"] > 0) {
+        if (!empty($data["source_id"]) && (int)$data["source_id"] > 0) {
             $sql .= " AND p.source_id='" . (int)$data["source_id"] . "'";
         }
 

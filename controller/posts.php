@@ -54,8 +54,8 @@ class Controller_Posts extends Controller
             $filters["search"] = $get["search"];
         }
 
-        if (!empty($get["source_id"]) && $get["source_id"] > 0) {
-            $filters["source_id"] = $get["source_id"];
+        if (!empty($get["source_id"]) && (int)$get["source_id"] > 0) {
+            $filters["source_id"] = (int)$get["source_id"];
         }
 
         if (!empty($get["sort"])) {
