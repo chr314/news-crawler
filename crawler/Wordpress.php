@@ -49,8 +49,8 @@ class Wordpress implements CrawlerInterface
                     $data[] = [
                         "source_post_id" => (int)$post["id"],
                         "source_author_id" => (int)$post["author"],
-                        "title" => $post["title"]["rendered"],
-                        "content" => $post["content"]["rendered"],
+                        "title" => html_entity_decode($post["title"]["rendered"]),
+                        "content" => html_entity_decode($post["content"]["rendered"]),
                         "source_url" => $post["link"],
                         "slug" => $post["slug"],
                         "source_id" => (int)$this->source_id,
