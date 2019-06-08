@@ -77,8 +77,8 @@ class Controller_Posts extends Controller
         foreach ($posts as $post) {
             $data[] = [
                 "post_id" => (int)$post["post_id"],
-                "title" => $post["title"],
-                "content" => mb_substr(strip_tags($post["content"]), 0, 500) . "...",
+                "title" => html_entity_decode($post["title"]),
+                "content" => html_entity_decode(mb_substr(strip_tags($post["content"]), 0, 500)) . "...",
                 "datetime" => date("d/m/Y", strtotime($post["publish_time"])),
             ];
         }
