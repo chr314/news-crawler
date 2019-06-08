@@ -17,7 +17,20 @@ var posts_filters = "";
 
 $("#searchCollapse > form").submit(false);
 
-load_tpl("/index.php?route=posts/posts_json&page=" + posts_page, "#posts-template", "#posts");
+let url_params = new URLSearchParams(window.location.search);
+let available_params = ["sort", "order", "source_id", "search"];
+
+let params = {};
+for (let param of available_params) {
+    if (url_params.has(param)) {
+        params[param] = url_params.get(param);
+    }
+}
+let params_query = Object.keys(params)
+    .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
+    .join('&');
+
+load_tpl("/index.php?route=posts/posts_json&page=" + posts_page + "&" + params_query, "#posts-template", "#posts");
 
 $("#searchCollapse button[type='submit']").on("click", function () {
     posts_page = 1;
