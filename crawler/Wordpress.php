@@ -40,10 +40,12 @@ class Wordpress implements CrawlerInterface
             $request_url = $source_data["url"] . "wp-json/wp/v2/posts?search=" . $search_term . "&per_page=100&page=" . $page
                 . (!empty($last_post) ? "&after=" . $last_post_time : "");
 
+            echo " *request " . $request_url . "\n";
             $resp = Curl::get($request_url);
+            echo " *response " . $resp . "\n";
             $json = json_decode($resp, true);
 
-            if (!empty($json) && is_array($json)) {
+            if (!empty($json) && is_array($json) && !isset($json["code"])) {
                 $data = [];
 
                 foreach ($json as $post) {

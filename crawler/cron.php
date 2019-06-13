@@ -10,6 +10,7 @@ $model_sources = new Model_Sources();
 $sources = $model_sources->getSources();
 
 foreach ($sources as $source) {
+    echo " - " . $source["name"] . " | crawler_method\n";
     if ($source["crawler_method"] === "wordpress") {
         $wp = new Wordpress($source["source_id"]);
         $wp->downloadNewPosts();
