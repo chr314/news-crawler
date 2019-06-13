@@ -15,3 +15,5 @@ foreach ($sources as $source) {
         $wp->downloadNewPosts();
     }
 }
+
+DB::close();

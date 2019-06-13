@@ -19,6 +19,7 @@ if (!empty($_GET["route"]) && preg_match_all("/([\w-]+)\/?/", $_GET["route"], $r
             $route_class = new $class_name();
             if (is_callable(array($route_class, $func_name))) {
                 $route_class->$func_name();
+                DB::close();
                 exit;
             }
         }
