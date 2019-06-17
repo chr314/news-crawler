@@ -12,6 +12,22 @@
                 <hr>
                 <?php echo $post_data["content"] ?>
             </div>
+
+            <div id="disqus_thread"></div>
+            <script>
+                var disqus_config = function () {
+                    this.page.url = "https://<?php echo $domain; ?>/index.php?route=posts/post&post_id=<?php echo $post_data["post_id"] ?>";
+                    this.page.identifier = <?php echo $post_data["post_id"] ?>;
+                };
+
+                (function () {
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://<?php echo $disqus_site_subdomain; ?>.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+            </script>
+
         </div>
 
         <aside class="col-md-4 blog-sidebar">

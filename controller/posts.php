@@ -22,6 +22,9 @@ class Controller_Posts extends Controller
             $data["header"] = $this->getController("common", "header", $header_data);
             $data["footer"] = $this->getController("common", "footer", $footer_data);
 
+            $data["disqus_site_subdomain"] = $this->model->settings->getSettingByName("disqus_site_subdomain");
+            $data["domain"] = $this->model->settings->getSettingByName("domain");
+
             $this->responseView("post", $data);
         }
     }
