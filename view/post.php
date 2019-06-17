@@ -26,6 +26,20 @@
                 <p class="mb-0"></p>
                 <a href=""><p class="mb-0"></p></a>
             </div>
+
+            <div class="p-4 mb-3 bg-light rounded" id="recommended-posts">
+                <h4 class="font-italic">More News</h4>
+            </div>
+
+            <script id="recommended-posts-template" type="text/x-handlebars-template">
+                {{#each this}}
+                <div>
+                    <a href="/index.php?route=posts/post&post_id={{post_id}}"><p class="mb-0">{{title}}</p></a>
+                    <hr>
+                </div>
+                {{/each}}
+            </script>
+
         </aside>
 
     </div>

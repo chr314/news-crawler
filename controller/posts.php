@@ -15,8 +15,12 @@ class Controller_Posts extends Controller
                 "styles" => ["/assets/css/post.css"]
             ];
 
+            $footer_data = [
+                "scripts" => ["https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js", "/assets/js/post.js?v=1.0.2"]
+            ];
+
             $data["header"] = $this->getController("common", "header", $header_data);
-            $data["footer"] = $this->getController("common", "footer");
+            $data["footer"] = $this->getController("common", "footer", $footer_data);
 
             $this->responseView("post", $data);
         }
